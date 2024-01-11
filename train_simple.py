@@ -156,7 +156,7 @@ def main(
     seed: int = 0,
     minibatch_size_per_device: Optional[float] = None,
     train_with_dropout: bool = False,
-    results_folder: str = "/tmp/results",
+    results_folder: str = "./results",
     linear_probe: bool = False,
     lr_schedule: str = "cosine_anneal",
     # Note: you can pass either weak_model_size or weak_labels_path. If you pass
