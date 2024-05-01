@@ -178,7 +178,7 @@ def train_and_save_model(
     save_path: Optional[str] = None,
     loss_fn: Callable = xent_loss,
     label: str = "default",
-    force_retrain: bool = True,
+    force_retrain: bool = False,
     train_with_dropout: bool = False,
     linear_probe: bool = False,
     lr_schedule: str = "constant",
@@ -197,12 +197,12 @@ def train_and_save_model(
     def maybe_load_model(model):
         if os.path.exists(os.path.join(save_path, "results.pkl")) and not force_retrain:
             print("loading from", save_path)
-            checkpoint_path = os.path.join(save_path, "pytorch_model.bin")
+            checkpoint_path = os.path.join(save_path, "model.safetensors")
             if not os.path.exists(checkpoint_path):
                 # Assume this means we have a sharded checkpoint, and load it appropriately
                 load_sharded_checkpoint(model, checkpoint_path)
             else:
-                state_dict = torch.load(os.path.join(save_path, "pytorch_model.bin"))
+                state_dict = torch.load(os.path.join(save_path, "model.safetensors"))
                 state_dict = {
                     k.replace("transformer.module", "transformer"): v
                     for (k, v) in state_dict.items()
