@@ -9,6 +9,7 @@ import datasets
 import numpy as np
 import torch
 import torch_optimizer as toptim
+from safetensors.torch import load_model
 from transformers.modeling_utils import load_sharded_checkpoint
 
 import weak_to_strong.logger as logger
@@ -202,12 +203,15 @@ def train_and_save_model(
                 # Assume this means we have a sharded checkpoint, and load it appropriately
                 load_sharded_checkpoint(model, checkpoint_path)
             else:
-                state_dict = torch.load(os.path.join(save_path, "model.safetensors"))
+                load_model(model,os.path.join(save_path, "model.safetensors"))
+                """
+                state_dict = load_model(os.path.join(save_path, "model.safetensors"))
                 state_dict = {
                     k.replace("transformer.module", "transformer"): v
                     for (k, v) in state_dict.items()
                 }
                 custom_kwargs["state_dict"] = state_dict
+                """
             return True
         return False
 
