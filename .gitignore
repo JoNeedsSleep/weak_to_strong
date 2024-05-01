@@ -2,3 +2,14 @@ dump
 *.pyc
 *.swp
 *.swo
+# Ignore directories
+/results/
+/logs/
+
+# Ignore files with specific extensions
+*.out
+*.err
+
+# Ignore specific config files
+*.yml
+*.toml

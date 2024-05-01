@@ -178,7 +178,7 @@ def train_and_save_model(
     save_path: Optional[str] = None,
     loss_fn: Callable = xent_loss,
     label: str = "default",
-    force_retrain: bool = False,
+    force_retrain: bool = True,
     train_with_dropout: bool = False,
     linear_probe: bool = False,
     lr_schedule: str = "constant",
