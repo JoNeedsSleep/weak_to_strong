@@ -9,6 +9,7 @@ dump
 # Ignore files with specific extensions
 *.out
 *.err
+*.pth
 
 # Ignore specific config files
 *.yml
